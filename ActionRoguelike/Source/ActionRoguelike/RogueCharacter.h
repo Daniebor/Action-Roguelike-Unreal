@@ -12,6 +12,7 @@ struct FInputActionValue;
 class UInputAction;
 class USpringArmComponent;
 class UCameraComponent;
+class UAnimMontage;
 
 UCLASS()
 class ACTIONROGUELIKE_API ARogueCharacter : public ACharacter
@@ -28,6 +29,9 @@ protected:
 	
 	UPROPERTY(VisibleAnywhere, Category = "Primary Attack")
 	FName MuzzleSocketName;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Primary Attack")
+	TObjectPtr<UAnimMontage> AttackMontage;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputAction> InputMove;
@@ -52,6 +56,8 @@ protected:
 	void Look(const FInputActionInstance& InValue);
 	
 	void PrimaryAttack();
+	
+	void AttackTimerElapsed();
 public:
 	// Called every frame
 	virtual void Tick(float DeltaTime) override;
