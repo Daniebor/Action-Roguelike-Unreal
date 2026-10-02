@@ -10,6 +10,7 @@ class UNiagaraSystem;
 class UNiagaraComponent;
 class UProjectileMovementComponent;
 class USphereComponent;
+class UAudioComponent;
 
 UCLASS(Abstract)
 class ACTIONROGUELIKE_API ARogueProjectileMagic : public AActor
@@ -17,15 +18,23 @@ class ACTIONROGUELIKE_API ARogueProjectileMagic : public AActor
 	GENERATED_BODY()
 
 protected:
+	UPROPERTY(EditDefaultsOnly, Category = "Damage")
+	TSubclassOf<UDamageType> DmgTypeClass;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Effects")
 	TObjectPtr<UNiagaraSystem> ExplosionEffect;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Sound")
+	TObjectPtr<USoundBase> ExplosionSound;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	TObjectPtr<USphereComponent> SphereComponent;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	TObjectPtr<UNiagaraComponent> LoopedNiagaraComponent;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	TObjectPtr<UAudioComponent> LoopedAudioComponent;
 
 	UPROPERTY(VisibleAnywhere, Category = "Components")
 	TObjectPtr<UProjectileMovementComponent> ProjectileMovementComponent;

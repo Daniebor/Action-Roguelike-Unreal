@@ -6,6 +6,7 @@
 #include "GameFramework/Character.h"
 #include "RogueCharacter.generated.h"
 
+class UNiagaraSystem;
 class ARogueProjectileMagic;
 struct FInputActionInstance;
 struct FInputActionValue;
@@ -26,6 +27,12 @@ public:
 protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Primary Attack")
 	TSubclassOf<ARogueProjectileMagic> ProjectileClass;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Primary Attack")
+	TObjectPtr<UNiagaraSystem> CastingEffect;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Primary Attack")
+	TObjectPtr<USoundBase> CastingSound;
 	
 	UPROPERTY(VisibleAnywhere, Category = "Primary Attack")
 	FName MuzzleSocketName;
