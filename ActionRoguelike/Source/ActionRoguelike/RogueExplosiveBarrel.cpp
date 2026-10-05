@@ -15,11 +15,14 @@ ARogueExplosiveBarrel::ARogueExplosiveBarrel()
 	StaticMeshComponent = CreateDefaultSubobject<UStaticMeshComponent>(TEXT("StaticMeshComp"));
 	SetRootComponent(StaticMeshComponent);
 	StaticMeshComponent->SetSimulatePhysics(true);
+	StaticMeshComponent->SetCollisionProfileName("PhysicsActor");
 	
 	RadialForceComponent = CreateDefaultSubobject<URadialForceComponent>(TEXT("RadialForceComp"));
 	RadialForceComponent->SetupAttachment(RootComponent);
+	RadialForceComponent->bAutoActivate = false;
 	RadialForceComponent->bIgnoreOwningActor = true;
-	RadialForceComponent->ImpulseStrength = 100000.0f;
+	RadialForceComponent->ImpulseStrength = 150000.0f;
+	RadialForceComponent->Radius = 800.f;
 	
 	LoopedAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("LoopedAudioComponent"));
 	LoopedAudioComponent->SetupAttachment(StaticMeshComponent);
@@ -28,6 +31,8 @@ ARogueExplosiveBarrel::ARogueExplosiveBarrel()
 float ARogueExplosiveBarrel::TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent,
 	class AController* EventInstigator, AActor* DamageCauser)
 {
+	float ActualDamage = Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	
 	if (!WasHit)
 	{
 		NiagaraBurningEffectComponent =  UNiagaraFunctionLibrary::SpawnSystemAttached(LoopedBurningEffect, StaticMeshComponent, FName(""), FVector::ZeroVector, FRotator::ZeroRotator, EAttachLocation::SnapToTarget, true);
@@ -40,17 +45,19 @@ float ARogueExplosiveBarrel::TakeDamage(float DamageAmount, struct FDamageEvent 
 		GetWorldTimerManager().SetTimer(ExplosionHandle, this, &ARogueExplosiveBarrel::Explode, ExplosionDelayTime);
 	}
 	
-	return Super::TakeDamage(DamageAmount, DamageEvent, EventInstigator, DamageCauser);
+	return ActualDamage;
 }
 
 void ARogueExplosiveBarrel::Explode()
-{
-	UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, ExplosionEffect, GetActorLocation());
-	UGameplayStatics::PlaySoundAtLocation(this, ExplosionSound, GetActorLocation());
+{	
 	NiagaraBurningEffectComponent->Deactivate();
 	LoopedAudioComponent->Stop();
 	
 	RadialForceComponent->FireImpulse();
+	
+	UNiagaraFunctionLibrary::SpawnSystemAtLocation(this, ExplosionEffect, GetActorLocation());
+	
+	UGameplayStatics::PlaySoundAtLocation(this, ExplosionSound, GetActorLocation());
 }
 
 

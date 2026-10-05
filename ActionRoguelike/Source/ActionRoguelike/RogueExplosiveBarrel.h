@@ -23,15 +23,6 @@ public:
 
 protected:
 	
-	UPROPERTY(VisibleAnywhere, Category = "Components")
-	TObjectPtr<UStaticMeshComponent> StaticMeshComponent;
-	
-	UPROPERTY(VisibleAnywhere, Category = "Components")
-	TObjectPtr<UAudioComponent> LoopedAudioComponent;
-	
-	UPROPERTY(VisibleAnywhere, Category = "Components")
-	TObjectPtr<URadialForceComponent> RadialForceComponent;
-	
 	UPROPERTY(EditDefaultsOnly, Category = "Effects")
 	TObjectPtr<UNiagaraSystem> LoopedBurningEffect;
 	
@@ -43,6 +34,16 @@ protected:
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Effects")
 	float ExplosionDelayTime = 3.0f;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	TObjectPtr<UStaticMeshComponent> StaticMeshComponent;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	TObjectPtr<UAudioComponent> LoopedAudioComponent;
+	
+	UPROPERTY(VisibleAnywhere, Category = "Components")
+	TObjectPtr<URadialForceComponent> RadialForceComponent;
+	
 	
 	float TakeDamage(float DamageAmount, struct FDamageEvent const& DamageEvent, class AController* EventInstigator, AActor* DamageCauser) override;
 	
