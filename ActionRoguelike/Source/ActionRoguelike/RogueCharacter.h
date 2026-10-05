@@ -44,6 +44,9 @@ protected:
 	TObjectPtr<UInputAction> InputMove;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Input")
+	TObjectPtr<UInputAction> InputJump;
+	
+	UPROPERTY(EditDefaultsOnly, Category = "Input")
 	TObjectPtr<UInputAction> InputLook;
 	
 	UPROPERTY(EditDefaultsOnly, Category = "Input")

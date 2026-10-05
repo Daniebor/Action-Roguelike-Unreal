@@ -35,6 +35,8 @@ void ARogueCharacter::SetupPlayerInputComponent(UInputComponent* PlayerInputComp
 	if (UEnhancedInputComponent* EnhancedInput = Cast<UEnhancedInputComponent>(PlayerInputComponent))
 	{
 		EnhancedInput->BindAction(InputMove, ETriggerEvent::Triggered, this, &ARogueCharacter::Move);
+		EnhancedInput->BindAction(InputJump, ETriggerEvent::Triggered, this, &ARogueCharacter::Jump);
+		
 		EnhancedInput->BindAction(InputLook, ETriggerEvent::Triggered, this, &ARogueCharacter::Look);
 		
 		EnhancedInput->BindAction(InputPrimaryAttack, ETriggerEvent::Triggered, this, &ARogueCharacter::PrimaryAttack);
