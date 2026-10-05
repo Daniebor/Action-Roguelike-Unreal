@@ -12,18 +12,18 @@
 
 ARogueProjectileMagic::ARogueProjectileMagic()
 {
-	SphereComponent = CreateDefaultSubobject<USphereComponent>("SphereComp");
+	SphereComponent = CreateDefaultSubobject<USphereComponent>(TEXT("SphereComp"));
 	SphereComponent->SetupAttachment(RootComponent);
 	SphereComponent->SetSphereRadius(16.0f);
 	SphereComponent->SetCollisionProfileName("Projectile");
 	
-	LoopedNiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>("LoopedNiagaraComp");
+	LoopedNiagaraComponent = CreateDefaultSubobject<UNiagaraComponent>(TEXT("LoopedNiagaraComp"));
 	LoopedNiagaraComponent->SetupAttachment(SphereComponent);
 	
-	LoopedAudioComponent = CreateDefaultSubobject<UAudioComponent>("LoopedAudioComponent");
+	LoopedAudioComponent = CreateDefaultSubobject<UAudioComponent>(TEXT("LoopedAudioComponent"));
 	LoopedAudioComponent->SetupAttachment(SphereComponent);
 
-	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>("ProjectileMoveComp");
+	ProjectileMovementComponent = CreateDefaultSubobject<UProjectileMovementComponent>(TEXT("ProjectileMoveComp"));
 	ProjectileMovementComponent->InitialSpeed = 2000.f;
 	ProjectileMovementComponent->ProjectileGravityScale = 0.0f; 
 }
