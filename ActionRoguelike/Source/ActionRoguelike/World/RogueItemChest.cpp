@@ -16,12 +16,10 @@ ARogueItemChest::ARogueItemChest()
 	LidMeshComponent->SetupAttachment(RootComponent);
 }
 
-void ARogueItemChest::BeginPlay()
+void ARogueItemChest::Interact()
 {
-	Super::BeginPlay();
-	
+	// Play Animation
 	SetActorTickEnabled(true);
-	
 }
 
 void ARogueItemChest::Tick(float DeltaTime)

@@ -16,7 +16,12 @@ protected:
 	UPROPERTY(EditDefaultsOnly, Category = "Interaction")
 	float InteractionRadius = 600.0f;
 	
+	UPROPERTY()
+	TObjectPtr<AActor> SelectedActor;
+	
 public:
+	void Interact();
+	
 	// Sets default values for this component's properties
 	URogueInteractionComponent();
 
