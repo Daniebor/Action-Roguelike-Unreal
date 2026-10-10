@@ -18,7 +18,7 @@ ARogueItemChest::ARogueItemChest()
 	LidMeshComponent->SetupAttachment(RootComponent);
 }
 
-void ARogueItemChest::Interact()
+void ARogueItemChest::Interact_Implementation()
 {
 	// Play Animation
 	SetActorTickEnabled(true);

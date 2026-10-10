@@ -15,10 +15,15 @@ URogueInteractionComponent::URogueInteractionComponent()
 
 void URogueInteractionComponent::Interact()
 {
-	IRogueInteractionInterface* InteractInterface = Cast<IRogueInteractionInterface>(SelectedActor);
+	/*IRogueInteractionInterface* InteractInterface = Cast<IRogueInteractionInterface>(SelectedActor);
 	if (InteractInterface)
 	{
 		InteractInterface->Interact();
+	}*/
+	
+	if (SelectedActor)
+	{
+		IRogueInteractionInterface::Execute_Interact(SelectedActor);
 	}
 }
 
