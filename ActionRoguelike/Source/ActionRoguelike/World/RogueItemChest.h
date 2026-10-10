@@ -29,6 +29,9 @@ protected:
 	float AnimationSpeed = 50.0f;
 	
 	float CurrentAnimationPitch = 0.0f;
+	
+	UFUNCTION(BlueprintImplementableEvent)
+	void ChestAnimationComplete();
 
 public:
 	
